@@ -11,10 +11,9 @@ module Hydra::Works
     #   3) Hydra::Works::GenericFile can NOT aggregate PCDM::Object unless it is also a Hydra::Works::GenericFile
     #   4) Hydra::Works::GenericFile can NOT aggregate Hydra::Works::GenericFile
     #   5) Hydra::Works::GenericFile can contain PCDM::File
-    #   6) Hydra::Works::GenericFile can contain Hydra::Works::File
-    #   7) Hydra::Works::GenericFile can NOT aggregate non-PCDM object
-    #   8) Hydra::Works::GenericFile can have descriptive metadata
-    #   9) Hydra::Works::GenericFile can have access metadata
+    #   6) Hydra::Works::GenericFile can NOT aggregate non-PCDM object
+    #   7) Hydra::Works::GenericFile can have descriptive metadata
+    #   8) Hydra::Works::GenericFile can have access metadata
     # TODO: add code to enforce behavior rules
 
     # TODO: Make members private so setting objects on aggregations has to go through the following methods.

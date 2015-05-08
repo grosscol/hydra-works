@@ -32,7 +32,7 @@ describe Hydra::Works::GenericWork do
   end
 
   describe '#generic_works=' do
-    xit 'should aggregate generic works' do
+    it 'should aggregate generic works' do
       work = Hydra::Works::GenericWork.create
       work1 = Hydra::Works::GenericWork.create
       work2 = Hydra::Works::GenericWork.create
@@ -41,7 +41,7 @@ describe Hydra::Works::GenericWork do
       expect(work.generic_works).to eq [work1, work2]
     end
 
-    xit 'should not aggregate other objects' do
+    it 'should not aggregate other objects' do
       work = Hydra::Works::GenericWork.create
       collection1 = Hydra::Works::Collection.create
       collection2 = Hydra::Works::Collection.create

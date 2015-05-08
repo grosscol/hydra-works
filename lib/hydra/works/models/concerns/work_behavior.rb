@@ -11,10 +11,9 @@ module Hydra::Works
     #   3) Hydra::Works::GenericWork can NOT aggregate Works::GenericWork unless it is also a Hydra::Works::GenericFile
     #   4) Hydra::Works::GenericWork can aggregate Hydra::Works::GenericFile
     #   5) Hydra::Works::GenericWork can NOT contain PCDM::File
-    #   6) Hydra::Works::GenericWork can NOT contain Hydra::Works::File
-    #   7) Hydra::Works::GenericWork can NOT aggregate non-PCDM object
-    #   8) Hydra::Works::GenericWork can have descriptive metadata
-    #   9) Hydra::Works::GenericWork can have access metadata
+    #   6) Hydra::Works::GenericWork can NOT aggregate non-PCDM object
+    #   7) Hydra::Works::GenericWork can have descriptive metadata
+    #   8) Hydra::Works::GenericWork can have access metadata
     # TODO: add code to enforce behavior rules
 
     # TODO: Inherit members as a private method so setting objects on aggregations has to go through the following methods.
@@ -40,12 +39,13 @@ module Hydra::Works
       # check that work is an instance of Hydra::Works::GenericFile
       raise ArgumentError, "each file must be a Hydra::Works::GenericFile" unless
           files.all? { |o| o.is_a? Hydra::Works::GenericFile }
-      self.members = files
+      self.members = self.generic_works + files
     end
 
     def generic_files
       # TODO: query fedora for generic file id && hasMember && rdf_type == RDFVocabularies::HydraWorksTerms.GenericFile
-      self.members
+      all_members = self.members.container.to_a
+      all_members.select { |m| m.is_a? Hydra::Works::GenericFile }
     end
 
     # TODO: Not sure how to handle work1.generic_files << new_file.
@@ -60,6 +60,20 @@ module Hydra::Works
     def generic_work? work
       return false unless work.is_a? Hydra::Works::GenericWork
     end
+
+    def generic_works= works
+      # check that object is an instance of Hydra::Works::GenericWork
+      raise ArgumentError, "each work must be a Hydra::Works::GenericWork" unless
+          works.all? { |o| o.is_a? Hydra::Works::GenericWork }
+      self.members = self.generic_files + works
+    end
+
+    def generic_works
+      # TODO: query fedora for collection id && hasMember && rdf_type == RDFVocabularies::HydraWorksTerms.Object
+      all_members = self.members.container.to_a
+      all_members.select { |m| m.is_a? Hydra::Works::GenericWork }
+    end
+
 
   end
 end
