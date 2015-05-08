@@ -57,5 +57,9 @@ module Hydra::Works
     #   * Are there any default properties to set for Collection's access metadata?
     #   * Is there a way to override default properties defined in this class?
 
+    def generic_work? work
+      return false unless work.is_a? Hydra::Works::GenericWork
+    end
+
   end
 end

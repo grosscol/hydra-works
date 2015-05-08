@@ -19,22 +19,29 @@ describe Hydra::Works::Collection do
       work1 = Hydra::Works::GenericWork.create
       work2 = Hydra::Works::GenericWork.create
       col.generic_works = [work1, work2]
-      col.save
       expect(col.save).to be true
     end
 
     it 'should not aggregate other Objects' do
       col = Hydra::Works::Collection.create
-      file1 = Hydra::Works::GenericFile.create
-      expect{ col.generic_works = [file1] }.to raise_error(ArgumentError,"each object must be a Hydra::Works::GenericWork")
+      col1 = Hydra::Works::Collection.create
+      work1 = Hydra::Works::GenericWork.create
+      expect{ col.generic_works = [col1, work1] }.to raise_error(ArgumentError,"each object must be a Hydra::Works::GenericWork")
     end
   end
 
   describe "#collections=" do
-    xit 'aggregates other Collections' do
+    it 'it aggregates a Hydra::Works::Collection' do
+      col = Hydra::Works::Collection.create
+      col1 = Hydra::Works::Collection.create
+      col.collections = [col1]
+      expect(col.save).to be true
     end
 
-    xit 'should not aggregate other Objects as collections' do
+    it 'should not aggregate a Hydra::PCDM::Collection' do
+      col = Hydra::Works::Collection.create
+      col1 = Hydra::PCDM::Collection.create
+      expect{ col.collections = [col1] }.to raise_error(ArgumentError,"each collection must be a Hydra::Works::Collection")
     end
   end
 

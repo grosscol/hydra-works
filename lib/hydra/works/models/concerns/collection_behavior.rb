@@ -34,17 +34,23 @@ module Hydra::Works
 
     #   # TODO: query fedora for collection id && hasMember && rdf_type == RDFVocabularies::HydraWorksTerms.Collection
     # end
+    def collections= collections
+      raise ArgumentError, "each collection must be a Hydra::Works::Collection" unless 
+          collections.all? { |c| c.is_a? Hydra::Works::Collection }
+      self.members = self.generic_works + collections
+    end
 
     def generic_works= works
       # check that object is an instance of Hydra::Works::GenericWork
       raise ArgumentError, "each object must be a Hydra::Works::GenericWork" unless
           works.all? { |o| o.is_a? Hydra::Works::GenericWork }
-      self.members = works
+      self.members = self.collections + works
     end
 
     def generic_works
       # TODO: query fedora for collection id && hasMember && rdf_type == RDFVocabularies::HydraWorksTerms.Object
-      self.members
+      all_members = self.members.container.to_a
+      all_members.select { |m| m.is_a? Hydra::Works::GenericWork }
     end
 
     # TODO: RDF metadata can be added using property definitions. -- inherit from Hydra::PCDM::Collection???
