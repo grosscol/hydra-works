@@ -39,6 +39,11 @@ module Hydra::Works
       self.members = self.generic_works + collections
     end
 
+    def collections
+      all_members = self.members.container.to_a
+      all_members.select { |c| c.is_a? Hydra::Works::Collection }
+    end
+
     def generic_works= works
       # check that object is an instance of Hydra::Works::GenericWork
       raise ArgumentError, "each object must be a Hydra::Works::GenericWork" unless
