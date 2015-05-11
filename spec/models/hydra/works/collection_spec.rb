@@ -6,15 +6,12 @@ describe Hydra::Works::Collection do
     it 'is a Hydra::PCDM::Collection' do
       col = Hydra::Works::Collection.create
       expect(col.save).to be true
-      
-      # Waiting for PR with this method be merged into master
-      # expect(Hydra::PCDM.collection? col).to be true
       expect(col.resource.type.include? RDFVocabularies::PCDMTerms.Collection).to be true
     end
   end
 
-  describe "#generic works=" do
-    it 'aggregates Generic Works' do
+  describe '#generic_works=' do
+    it 'aggregates Hydra::Works::GenericWork in generic_works aggregation' do
       col = Hydra::Works::Collection.create
       work1 = Hydra::Works::GenericWork.create
       work2 = Hydra::Works::GenericWork.create
@@ -22,23 +19,30 @@ describe Hydra::Works::Collection do
       expect(col.save).to be true
     end
 
-    it 'should not aggregate other Objects' do
+    it 'should not aggregate a Hydra::Works::Collection in generic_works aggregation' do
       col = Hydra::Works::Collection.create
       col1 = Hydra::Works::Collection.create
       work1 = Hydra::Works::GenericWork.create
       expect{ col.generic_works = [col1, work1] }.to raise_error(ArgumentError,"each object must be a Hydra::Works::GenericWork")
     end
+
+    it 'should not aggregate a Hydra::Works::GenericFile in generic_works aggregation' do
+      col = Hydra::Works::Collection.create
+      genfile = Hydra::Works::GenericFile.create
+      work = Hydra::Works::GenericWork.create
+      expect{ col.generic_works = [ genfile, work ]}.to raise_error(ArgumentError,"each object must be a Hydra::Works::GenericWork")
+    end
   end
 
-  describe "#collections=" do
-    it 'it aggregates a Hydra::Works::Collection' do
+  describe '#collections=' do
+    it 'it can aggregate a Hydra::Works::Collection in collections aggregation' do
       col = Hydra::Works::Collection.create
       col1 = Hydra::Works::Collection.create
       col.collections = [col1]
       expect(col.save).to be true
     end
 
-    it 'should not aggregate a Hydra::PCDM::Collection' do
+    it 'should not aggregate a Hydra::PCDM::Collection in the collections aggregation' do
       col = Hydra::Works::Collection.create
       col1 = Hydra::PCDM::Collection.create
       expect{ col.collections = [col1] }.to raise_error(ArgumentError,"each collection must be a Hydra::Works::Collection")

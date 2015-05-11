@@ -14,7 +14,7 @@ describe Hydra::Works::GenericWork do
   end
 
   describe '#generic_files=' do
-    it 'should aggregate generic files' do
+    it 'should aggregate Hydra::Works::GenericFile in the generic_files aggregation' do
       work = Hydra::Works::GenericWork.create
       file1 = Hydra::Works::GenericFile.create
       file2 = Hydra::Works::GenericFile.create
@@ -23,7 +23,7 @@ describe Hydra::Works::GenericWork do
       expect(work.generic_files).to eq [file1, file2]
     end
 
-    it 'should not aggregate other objects' do
+    it 'should not aggregate Hydra::Works::Collection in the generic_files aggregation' do
       work = Hydra::Works::GenericWork.create
       collection1 = Hydra::Works::Collection.create
       collection2 = Hydra::Works::Collection.create
@@ -32,7 +32,7 @@ describe Hydra::Works::GenericWork do
   end
 
   describe '#generic_works=' do
-    it 'should aggregate generic works' do
+    it 'should aggregate Hydra::Works::GenericWork in the generic_works aggregation' do
       work = Hydra::Works::GenericWork.create
       work1 = Hydra::Works::GenericWork.create
       work2 = Hydra::Works::GenericWork.create
@@ -41,7 +41,7 @@ describe Hydra::Works::GenericWork do
       expect(work.generic_works).to eq [work1, work2]
     end
 
-    it 'should not aggregate other objects' do
+    it 'should not aggregate Hydra::Works::Collection in the generic_works aggregation' do
       work = Hydra::Works::GenericWork.create
       collection1 = Hydra::Works::Collection.create
       collection2 = Hydra::Works::Collection.create
