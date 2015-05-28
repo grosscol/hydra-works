@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Hydra::Works::ContainedFiles do
+describe Hydra::Works::File::ContainedFiles do
 
   let(:generic_file) do
     Hydra::Works::GenericFile.create

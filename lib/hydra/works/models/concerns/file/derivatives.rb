@@ -1,4 +1,4 @@
-module Hydra::Works
+module Hydra::Works::File
   module Derivatives
     extend ActiveSupport::Concern
     
