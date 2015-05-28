@@ -17,7 +17,7 @@ module Hydra::Works
     #   4) Hydra::Works::Collection can NOT aggregate Hydra::Works::GenericFile
     #   5) Hydra::Works::Collection can NOT aggregate non-PCDM object
     #   6) Hydra::Works::Collection can NOT contain Hydra::PCDM::File
-    #   7) Hydra::Works::Collection can NOT contain Hydra::Works::File
+    #   7) Hydra::Works::Collection can NOT contain
 
     #   8) Hydra::Works::Collection can have descriptive metadata
     #   9) Hydra::Works::Collection can have access metadata

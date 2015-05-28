@@ -9,7 +9,7 @@ module Hydra::Works
   #   5) Hydra::Works::GenericWork can NOT aggregate Works::Object unless it is also a Hydra::Works::GenericFile
   #   6) Hydra::Works::GenericWork can NOT contain PCDM::File
   #   7) Hydra::Works::GenericWork can NOT aggregate non-PCDM object
-  #   8) Hydra::Works::GenericWork can NOT contain Hydra::Works::File
+  #   8) Hydra::Works::GenericWork can NOT contain Hydra::Works::GenericFile
   #   9) Hydra::Works::GenericWork can have descriptive metadata
   #   10) Hydra::Works::GenericWork can have access metadata
   module GenericWorkBehavior

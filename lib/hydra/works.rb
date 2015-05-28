@@ -20,7 +20,7 @@ module Hydra
     autoload :GenericWorkBehavior,    'hydra/works/models/concerns/generic_work_behavior'
     autoload :GenericFileBehavior,    'hydra/works/models/concerns/generic_file_behavior'
     autoload :AggregatesGenericFiles, 'hydra/works/models/concerns/aggregates_generic_files'
-    autoload :File,                   'hydra/works/models/concerns/file'
+    autoload :GenericFile,                   'hydra/works/models/generic_file'
 
     # collection services
     autoload :AddCollectionToCollection,           'hydra/works/services/collection/add_collection'

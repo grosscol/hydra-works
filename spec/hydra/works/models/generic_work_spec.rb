@@ -2,12 +2,12 @@ require 'spec_helper'
 
 describe Hydra::Works::GenericWork do
 
-  let(:generic_work1) { Hydra::Works::GenericWork.create }
-  let(:generic_work2) { Hydra::Works::GenericWork.create }
-  let(:generic_work3) { Hydra::Works::GenericWork.create }
+  let(:generic_work1) { Hydra::Works::GenericWork::Base.create }
+  let(:generic_work2) { Hydra::Works::GenericWork::Base.create }
+  let(:generic_work3) { Hydra::Works::GenericWork::Base.create }
 
-  let(:generic_file1) { Hydra::Works::GenericFile.create }
-  let(:generic_file2) { Hydra::Works::GenericFile.create }
+  let(:generic_file1) { Hydra::Works::GenericFile::Base.create }
+  let(:generic_file2) { Hydra::Works::GenericFile::Base.create }
 
   let(:pcdm_file1)       { Hydra::PCDM::File.new }
 
@@ -34,7 +34,7 @@ describe Hydra::Works::GenericWork do
   end
 
   describe 'Related objects' do
-    let(:generic_work1) { Hydra::Works::GenericWork.create }
+    let(:generic_work1) { Hydra::Works::GenericWork::Base.create }
     let(:object1) { Hydra::PCDM::Object.create }
 
     before do
