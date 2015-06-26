@@ -8,10 +8,9 @@ describe Hydra::Works::PersistDerivativesOutputFile do
   let(:file)                { File.new(destination_name) }
   let(:type)                { ::RDF::URI("http://pcdm.org/ExtractedText") }
   let(:service_type)        { ::RDF::URI("http://pcdm.org/ServiceFile") }
-  let(:update_existing)     { false }
-  let(:versioning)          { false }
 
-  it "persists a service file by default with update existing" do
+
+  it "persists a service file by default" do
     Hydra::Works::PersistDerivativesOutputFile.call(generic_file, file, destination_name)
     expect(generic_file.filter_files_by_type(service_type).first.content).to start_with("%PDF-1.3")
   end
